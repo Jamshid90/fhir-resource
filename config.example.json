@@ -1,0 +1,14 @@
+{
+  "server" : {
+    "host"     : "localhost",
+    "port" : "9000"
+  },
+  "database": {
+    "host"     : "127.0.0.1",
+    "port"     : "5432",
+    "user"     : "user",
+    "dbname"   : "dbname",
+    "password" : "password",
+    "sslmode"  : "disable"
+  }
+}
