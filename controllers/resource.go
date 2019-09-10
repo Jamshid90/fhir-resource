@@ -11,7 +11,6 @@ import (
 
 func ResourceHandler(w http.ResponseWriter, r *http.Request){
 	w.Header().Set("Content-Type", "application/json")
-
 	path_split := strings.Split(r.URL.Path, "/")
 	resourceType := path_split[2]
 	resource, err := schema.GetFhirResourceInstance(resourceType)
@@ -104,8 +103,6 @@ func (rc *ResourceController) CreateResource(w http.ResponseWriter, r *http.Requ
 		Data:rc.Resource,
 		ResourceType:rc.ResourceType,
 	}
-
-	model_resource.CreateTable()
 	err = model_resource.Create()
 
 	if err != nil {

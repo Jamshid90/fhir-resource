@@ -3,9 +3,11 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"github.com/Jamshid90/fhir-schema"
 	_ "github.com/lib/pq"
 	"log"
 	"os"
+	"strings"
 )
 
 var db *sql.DB
@@ -35,6 +37,18 @@ func Query(query string, args ...interface{}) (*sql.Rows, error) {
 
 func Exec(query string, args ...interface{}) (sql.Result, error) {
 	return db.Exec( query, args...)
+}
+
+func CreateTable(){
+	fhir_resourc := schema.GetFhirResourceMap()
+	for k, _ := range fhir_resourc{
+		query := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s (
+										id serial primary key,
+										data jsonb,
+										created_at timestamp(0) without time zone )`,
+			strings.ToLower(k))
+		Exec(query)
+	}
 }
 
 func Cloce(){

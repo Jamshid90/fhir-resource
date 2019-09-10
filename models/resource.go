@@ -16,15 +16,6 @@ type Resource struct {
 	CreatedAt string `json:"created_at,omitempty"`
 }
 
-func (r *Resource) CreateTable()  {
-	query := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s ( 
-									id serial primary key, 
-									data jsonb, 
-									created_at timestamp(0) without time zone )`,
-									strings.ToLower(r.ResourceType))
-	database.Exec(query)
-}
-
 func (r *Resource) Create() error  {
 	sql := fmt.Sprintf("INSERT INTO %s ( data, created_at ) VALUES( $1, $2 )", strings.ToLower(r.ResourceType))
 
