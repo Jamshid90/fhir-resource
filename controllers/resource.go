@@ -43,9 +43,11 @@ type ResourceController struct {
 
 func (rc *ResourceController) GetResource(w http.ResponseWriter, r *http.Request)  {
 
+	request_query := r.URL.Query()
 	model_resource := models.Resource{ResourceType:rc.ResourceType}
+	criteria := model_resource.BuildCriteria(request_query)
 
-	items, err := model_resource.Get()
+	items, err := model_resource.Get(criteria)
 
 	if err != nil {
 		json.NewEncoder(w).Encode(Response{

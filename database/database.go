@@ -57,3 +57,10 @@ func Cloce(){
 		log.Fatal(err)
 	}
 }
+
+type Criteria struct {
+	Relation string
+	Key string
+	Value string
+	Compare string
+}
